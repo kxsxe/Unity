@@ -1,31 +1,19 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
-using TMPro;
+using UnityEngine.UI;
 
 public class GameDirector : MonoBehaviour
 {
-    GameObject car;
-    GameObject flag;
-    GameObject distance;
+    GameObject hpGauge;
 
     void Start()
     {
-        this.car = GameObject.Find("car");
-        this.flag = GameObject.Find("flag");
-        this.distance = GameObject.Find("distance");
+        this.hpGauge = GameObject.Find("hpGauge");
     }
 
-    void Update()
+    public void DecreaseHp()
     {
-        float length = this.flag.transform.position.x - this.car.transform.position.x;
-        if (length >= 0)
-        {
-            this.distance.GetComponent<TextMeshProUGUI>().text = "Distance: " + length.ToString("F2") + "m";
-        }
-        else
-        {
-            this.distance.GetComponent<TextMeshProUGUI>().text = "GameOver";
-        }
+        this.hpGauge.GetComponent<Image>().fillAmount -= 0.1f;
     }
 }
