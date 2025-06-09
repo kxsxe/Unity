@@ -1,19 +1,35 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
-using UnityEngine.UI;
+using TMPro;
 
 public class GameDirector : MonoBehaviour
 {
-    GameObject hpGauge;
+    GameObject timerText;
+    GameObject pointText;
+    float time = 30.0f;
+    int point = 0;
+
+    public void GetApple()
+    {
+        this.point += 100;
+    }
+
+    public void GetBomb()
+    {
+        this.point /= 2;
+    }
 
     void Start()
     {
-        this.hpGauge = GameObject.Find("hpGauge");
+        this.timerText = GameObject.Find("Time");
+        this.pointText = GameObject.Find("Point");
     }
 
-    public void DecreaseHp()
+    void Update()
     {
-        this.hpGauge.GetComponent<Image>().fillAmount -= 0.1f;
+        this.time -= Time.deltaTime;
+        this.timerText.GetComponent<TextMeshProUGUI>().text = this.time.ToString("F1");
+        this.pointText.GetComponent<TextMeshProUGUI>().text = this.point.ToString() + " point";
     }
 }
